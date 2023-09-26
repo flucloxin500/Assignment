@@ -1,92 +1,122 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget{
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
       home: HomeScreen(),
-      title: 'Flucloxin 250',
+      title: 'assignment 2',
     );
   }
 }
-
-class HomeScreen extends StatelessWidget{
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
+
       appBar: AppBar(
-        centerTitle: true,
-        title: Text('Home',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+        title: Center(
+          child: Text("Photo Gallery"),
         ),
-        toolbarHeight: 100,
-        backgroundColor: Colors.green,
-        elevation: 70,
-        actions: [
-          Icon(Icons.search),
-        ],
-        leading: Icon(Icons.add_business),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('This is ', style:
-              TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
-              ),),
-              Text('mod 5 ', style:
-              TextStyle(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                "Welcome to My Photo Gallery!",
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 17
-              ),),
-              Text('Assignment',style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),),
-            ],
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text('My ',style: TextStyle(
-                  fontSize: 21,
-                  color: Colors.pink
-              ),),
-              Text('phone ',style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.blue
-              ),),
-              Text('name ',style: TextStyle(
-                  fontSize: 19,
-                  color: Colors.deepPurpleAccent
-              ),),
-              Text('iPhone 11 ',style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.orange
-              ),),
-            ],
-          )
-        ],
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Search for photos....",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemCount: 6,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Image clicked"),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      Image.network(
+                        "https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0",
+                        height: 200,
+                        width: 200,
+                        fit: BoxFit.cover,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Text("Photo ${index + 1}"),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Photo 1"),
+              subtitle: Text("description about photo 1"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ListTile(
+              title: Text("Photo 2"),
+              subtitle: Text("description about photo 2"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ListTile(
+              title: Text("Photo 3"),
+              subtitle: Text("description about photo 3"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ElevatedButton(
+
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Photos Uploaded !"),
+                  ),
+                );
+              },
+              child: Center(
+                child: Icon
+                  (Icons.upload,size: 50,),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
-
-}
-
-void main (){
-  runApp(MyApp());
 }
