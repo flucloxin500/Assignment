@@ -1,18 +1,25 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'home_screen.dart';
 
-void main() {
+void main(){
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.white));
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
+      theme: ThemeData(
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme.apply(bodyColor: Colors.black))
+      ),
     );
   }
 }
